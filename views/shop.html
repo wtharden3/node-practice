@@ -5,17 +5,86 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shop</title>
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: sans-serif;
+      }
+
+      .header {
+        width: 100%;
+        height: 3.5rem;
+        background-color: rgb(48, 29, 68);
+        
+      }
+
+      .header__nav {
+        padding-left: 1.5rem;
+        color: rgb(241, 239, 243);
+        /* centering vertically */
+        height: 100%;
+        display: flex;
+        align-items: center;
+      }
+
+
+      .header__item-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+      }
+      .header__item {
+        padding: 0;
+        margin: 0;
+      }
+
+      .header__item:not(:last-child) {
+        padding-right: 2rem;
+      }
+
+      /* .header__item a {
+        color: rgb(241, 239, 243);
+        text-decoration: none;
+        transition-delay: 2s;
+      } */
+
+      .header__item a:link,
+      .header__item a:visited {
+        color: rgb(241, 239, 243);
+        text-decoration: none;
+        transition-delay: 0.125s;
+        transition-duration: 0.125s;
+      }
+
+      .header__item a:active,
+      .header__item a:hover,
+      .header__item a.active {
+        color: rgb(243, 72, 215);
+        transition-delay: 0.125s;
+        transition-duration: 0.125s;
+        transition-property: color;
+      }
+
+      .main {
+        padding: 1rem;
+      }
+    </style>
   </head>
   <body>
-    <header>
-      <nav>
-        <ul>
-          <li><a href="/">Shop</a></li>
-          <li><a href="/admin/add-product">Add Product</a></li>
+    <header class="header">
+      <nav class="header__nav">
+        <ul class="header__item-list">
+          <li class="header__item"><a class="active" href="/">Shop</a></li>
+          <li class="header__item">
+            <a href="/admin/add-product">Add Product</a>
+          </li>
         </ul>
       </nav>
     </header>
-    <main>
+    <main class="main">
       <h1>My Products</h1>
       <p>list of all products...</p>
     </main>
