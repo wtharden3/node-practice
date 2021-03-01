@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 
 const app = express();
@@ -23,7 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 // })
 app.use('/admin', adminRouter);
 
-app.use('/shop', shopRouter);
+app.use(shopRouter);
 
 // app.use('/', (req, res, next) => {
 //   // console.log('in another midware')
@@ -31,11 +32,12 @@ app.use('/shop', shopRouter);
 // })
 
 app.use((req,res,next) => {
-  res.status(404).send('<h1>404: Page not found</h1>')
+  const appPath = path.join(__dirname, 'views', '404.html');
+  res.status(404).sendFile(appPath)
 })
 
 app.listen(3001, () => {
   console.log(
-    '[SERVER]: You are now practicing on port 3001. http://127.0.0.1:3001/'
+    '[SERVER]: You are now practicing on port 3001. http://127.0.0.1:3001/ or http://127.0.0.1:3001/admin/add-product'
   );
 });
