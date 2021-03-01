@@ -1,27 +1,41 @@
 const express = require('express');
+
 const app = express();
-// const bodyParser = require('body-parser');
+
+const adminRouter = require('./routes/admin');
+const shopRouter = require('./routes/shop');
 
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/add-product', (req, res, next) => {
-  // console.log('in the midware')
-  res.send( '<form action="/product" method="POST"><input type="text" name="title"/><button type="submit">Add Product</button></form>');
-  // next() // allows the request to move on to the next middleware in line
-}) // .use() allows us to add a new middleware function. it's from express which is all about middleware
+// .use for any method for this endpoint
+// app.use('/add-product', (req, res, next) => {
+//   // console.log('in the midware')
+//   res.send( '<form action="/product" method="POST"><input type="text" name="title"/><button type="submit">Add Product</button></form>');
+//   // next() // allows the request to move on to the next middleware in line
+// }) // .use() allows us to add a new middleware function. it's from express which is all about middleware
 
-app.use('/product', (req, res, next) => {
-  console.log('product added');
-  // res.send('<h2>Product added successfully!</h2>')
-  console.log('req.body ===> ', req.body)
-  res.redirect('/')
-})
+//use .post() to use for only post requests using this endpoint
+// app.post('/product', (req, res, next) => {
+//   console.log('product added');
+//   // res.send('<h2>Product added successfully!</h2>')
+//   console.log('req.body ===> ', req.body)
+//   res.redirect('/')
+// })
+app.use('/admin', adminRouter);
 
-app.use('/', (req, res, next) => {
-  // console.log('in another midware')
-  res.send( '<h1>Hey you there</h1>') // .send() allows us to send a response
+app.use('/shop', shopRouter);
+
+// app.use('/', (req, res, next) => {
+//   // console.log('in another midware')
+//   res.send( '<h1>Hey you there</h1>') // .send() allows us to send a response
+// })
+
+app.use((req,res,next) => {
+  res.status(404).send('<h1>404: Page not found</h1>')
 })
 
 app.listen(3001, () => {
-  console.log('[SERVER]: You are now practicing on port 3001. http://127.0.0.1:3001/')
-})
+  console.log(
+    '[SERVER]: You are now practicing on port 3001. http://127.0.0.1:3001/'
+  );
+});
