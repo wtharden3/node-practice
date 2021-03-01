@@ -7,6 +7,7 @@ const adminRouter = require('./routes/admin');
 const shopRouter = require('./routes/shop');
 
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public'))) //makes files in the public folder static and accessible ex. main.css. Images are another example of what can go in this folder
 
 // .use for any method for this endpoint
 // app.use('/add-product', (req, res, next) => {
