@@ -4,10 +4,14 @@ const express = require('express');
 
 const app = express();
 
+app.set('view engine', 'pug');
+app.set('views', './views')
+
 const port = process.env.PORT;
 
 const adminData = require('./routes/admin');
 const shopRouter = require('./routes/shop');
+
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public'))) //makes files in the public folder static and accessible ex. main.css. Images are another example of what can go in this folder
