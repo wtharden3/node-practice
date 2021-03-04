@@ -1,9 +1,12 @@
+require('dotenv').config();
 const path = require('path');
 const express = require('express');
 
 const app = express();
 
-const adminRouter = require('./routes/admin');
+const port = process.env.PORT;
+
+const adminData = require('./routes/admin');
 const shopRouter = require('./routes/shop');
 
 app.use(express.urlencoded({ extended: true }));
@@ -23,7 +26,7 @@ app.use(express.static(path.join(__dirname, 'public'))) //makes files in the pub
 //   console.log('req.body ===> ', req.body)
 //   res.redirect('/')
 // })
-app.use('/admin', adminRouter);
+app.use('/admin', adminData.routes);
 
 app.use(shopRouter);
 
@@ -37,8 +40,8 @@ app.use((req,res,next) => {
   res.status(404).sendFile(appPath)
 })
 
-app.listen(3001, () => {
+app.listen(port, () => {
   console.log(
-    '[SERVER]: You are now practicing on port 3001. http://127.0.0.1:3001/ or http://127.0.0.1:3001/admin/add-product'
+    `[SERVER]: You are now practicing on port ${port}. http://127.0.0.1:${port}/ or http://127.0.0.1:${port}/admin/add-product`
   );
 });

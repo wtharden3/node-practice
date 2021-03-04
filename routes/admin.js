@@ -2,6 +2,8 @@ const path = require('path');
 const router = require('express').Router();
 const rootDir = require('../util/path')
 
+const products = [];
+
 router.use(require('express').urlencoded({ extended: true }));
 
 // .get for any method for this endpoint
@@ -14,7 +16,10 @@ router.get('/add-product', (req, res, next) => {
 router.post('/add-product', (req, res, next) => {
   console.log('req.body ==>', req.body);
   console.log('req.body.title ==>', req.body.title);
+  products.push({title: req.body.title});
+  console.log('products ==> ', products)
   res.redirect('/');
 });
 
-module.exports = router;
+exports.routes = router;
+exports.products = products;
