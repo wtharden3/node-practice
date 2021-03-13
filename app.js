@@ -4,6 +4,7 @@ const express = require('express');
 
 const app = express();
 
+// pug
 app.set('view engine', 'pug');
 app.set('views', './views')
 
@@ -40,8 +41,9 @@ app.use(shopRouter);
 // })
 
 app.use((req,res,next) => {
-  const appPath = path.join(__dirname, 'views', '404.html');
-  res.status(404).sendFile(appPath)
+  // const appPath = path.join(__dirname, 'views', '404.html');
+  // res.status(404).sendFile(appPath)
+  res.status(404).render('404', {docTitle: '404: Page Not Found'})
 })
 
 app.listen(port, () => {

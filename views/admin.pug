@@ -1,23 +1,35 @@
-doctype html
-html(lang="en")
-  head
-    meta(charset="UTF-8")
-    meta(http-equiv="X-UA-Compatible", content="IE=edge")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    title Admin
-  body 
-    header.header
-      nav.header__nav 
-        ul.header__item-list 
-          li.header__item
-            a(href='/') Shop 
-          li.header__item
-            a.active(class='active', href='/admin/add-product') Add Product 
-    main.main
-      h1(class='h1 main__h1') This is the admin 
-      h2(class='h2 main__h2') Add a product 
-      form(class='product-form form', action='/admin/add-product', method='POST')
-        .form-control 
-          label(for="title") Product Title 
-          input(class='product-form__input', type='text', name='title', id='title')
-          button(class='btn product-form__btn') Add This Product
+extends layouts/main-layout.pug
+
+block content 
+      main.main
+        h1(class='h1 main__h1') #{docTitle} 
+        h2(class='h2 main__h2') Add a product 
+        form(class='product-form form', action='/admin/add-product', method='POST')
+          .form-control 
+            label(for="title") Product Title 
+            input(class='product-form__input', type='text', name='title', id='title')
+            button(class='btn product-form__btn') Add This Product
+//- doctype html
+//- html(lang="en")
+//-   head
+//-     meta(charset="UTF-8")
+//-     meta(http-equiv="X-UA-Compatible", content="IE=edge")
+//-     meta(name="viewport", content="width=device-width, initial-scale=1.0")
+//-     title #{docTitle}
+//-     link(rel="stylesheet", href="/css/main.css")
+//-   body 
+//-     header.header
+//-       nav.header__nav 
+//-         ul.header__item-list 
+//-           li.header__item
+//-             a(href='/') Shop 
+//-           li.header__item
+//-             a.active(class='active', href='/admin/add-product') Add Product 
+//-     main.main
+//-       h1(class='h1 main__h1') #{docTitle} 
+//-       h2(class='h2 main__h2') Add a product 
+//-       form(class='product-form form', action='/admin/add-product', method='POST')
+//-         .form-control 
+//-           label(for="title") Product Title 
+//-           input(class='product-form__input', type='text', name='title', id='title')
+//-           button(class='btn product-form__btn') Add This Product
