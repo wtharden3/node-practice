@@ -1,21 +1,25 @@
 require('dotenv').config();
 const path = require('path');
 const express = require('express');
+const Handlebars = require('express-handlebars');
 
 const app = express();
 
+//handlebars
+app.engine('hbs', Handlebars({layoutsDir: 'views/layouts/', defaultLayout: 'main-layout.hbs', extname: 'hbs'}));
+app.set('view engine', 'hbs');
+
 // pug
-app.set('view engine', 'pug');
-app.set('views', './views')
+// app.set('view engine', 'pug');
+app.set('views', './views');
 
 const port = process.env.PORT;
 
 const adminData = require('./routes/admin');
 const shopRouter = require('./routes/shop');
 
-
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public'))) //makes files in the public folder static and accessible ex. main.css. Images are another example of what can go in this folder
+app.use(express.static(path.join(__dirname, 'public'))); //makes files in the public folder static and accessible ex. main.css. Images are another example of what can go in this folder
 
 // .use for any method for this endpoint
 // app.use('/add-product', (req, res, next) => {
@@ -40,11 +44,11 @@ app.use(shopRouter);
 //   res.send( '<h1>Hey you there</h1>') // .send() allows us to send a response
 // })
 
-app.use((req,res,next) => {
+app.use((req, res, next) => {
   // const appPath = path.join(__dirname, 'views', '404.html');
   // res.status(404).sendFile(appPath)
-  res.status(404).render('404', {docTitle: '404: Page Not Found'})
-})
+  res.status(404).render('404', { docTitle: '404: Page Not Found' });
+});
 
 app.listen(port, () => {
   console.log(
