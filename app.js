@@ -1,13 +1,17 @@
 require('dotenv').config();
 const path = require('path');
 const express = require('express');
-const Handlebars = require('express-handlebars');
+const ejs = require('ejs');
+// const Handlebars = require('express-handlebars');
 
 const app = express();
 
+// ejs
+app.set('view engine', 'ejs');
+
 //handlebars
-app.engine('hbs', Handlebars({layoutsDir: 'views/layouts/', defaultLayout: 'main-layout.hbs', extname: 'hbs'}));
-app.set('view engine', 'hbs');
+// app.engine('hbs', Handlebars({layoutsDir: 'views/layouts/', defaultLayout: 'main-layout.hbs', extname: 'hbs'}));
+// app.set('view engine', 'hbs');
 
 // pug
 // app.set('view engine', 'pug');
@@ -47,7 +51,7 @@ app.use(shopRouter);
 app.use((req, res, next) => {
   // const appPath = path.join(__dirname, 'views', '404.html');
   // res.status(404).sendFile(appPath)
-  res.status(404).render('404', { docTitle: '404: Page Not Found' });
+  res.status(404).render('404', { docTitle: '404: Page Not Found', path: '' });
 });
 
 app.listen(port, () => {
