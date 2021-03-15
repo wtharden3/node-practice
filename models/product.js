@@ -1,6 +1,22 @@
-// const products = [];
 const fs = require('fs');
 const path = require('path');
+
+const p = path.join(
+  path.dirname(require.main.filename),
+  'data',
+  'products.json'
+);
+
+const getProductsFromFile = callBackFn => {
+  console.log('p ===>', p);
+  fs.readFile(p, (err, fileContent) => {
+    if (err) {
+      callBackFn([]);
+    } else {
+      callBackFn(JSON.parse(fileContent));
+    }
+  });
+};
 
 module.exports = class Product {
   constructor(title) {
@@ -8,38 +24,13 @@ module.exports = class Product {
   }
 
   save() {
-    // products.push(this);
-    // save to a file instead
-    const p = path.join(
-      path.dirname(require.main.filename),
-      'data',
-      'products.json'
-    );
-
-    fs.readFile(p, (err, fileContent) => {
-      let products = [];
-      if (!err) {
-        //create new empty array
-        products = JSON.parse(fileContent);
-      }
+    getProductsFromFile(products => {
       products.push(this);
       fs.writeFile(p, JSON.stringify(products), err => console.log(err));
     });
   }
 
   static fetchAll(callBackFn) {
-    const p = path.join(
-      path.dirname(require.main.filename),
-      'data',
-      'products.json'
-    );
-    console.log('p ===>', p);
-    fs.readFile(p, (err, fileContent) => {
-      if (err) {
-        callBackFn([])
-      }
-      callBackFn(JSON.parse(fileContent));
-    });
-    // return products;
+    getProductsFromFile(callBackFn);
   }
 };
