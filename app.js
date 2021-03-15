@@ -2,6 +2,7 @@ require('dotenv').config();
 const path = require('path');
 const express = require('express');
 const ejs = require('ejs');
+const {useError} = require('./controllers/error')
 // const Handlebars = require('express-handlebars');
 
 const app = express();
@@ -19,8 +20,8 @@ app.set('views', './views');
 
 const port = process.env.PORT;
 
-const adminData = require('./routes/admin');
-const shopRouter = require('./routes/shop');
+const adminRoutes = require('./routes/admin');
+const shopRoutes = require('./routes/shop');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public'))); //makes files in the public folder static and accessible ex. main.css. Images are another example of what can go in this folder
@@ -39,20 +40,16 @@ app.use(express.static(path.join(__dirname, 'public'))); //makes files in the pu
 //   console.log('req.body ===> ', req.body)
 //   res.redirect('/')
 // })
-app.use('/admin', adminData.routes);
 
-app.use(shopRouter);
+app.use('/admin', adminRoutes);
+app.use(shopRoutes);
 
 // app.use('/', (req, res, next) => {
 //   // console.log('in another midware')
 //   res.send( '<h1>Hey you there</h1>') // .send() allows us to send a response
 // })
 
-app.use((req, res, next) => {
-  // const appPath = path.join(__dirname, 'views', '404.html');
-  // res.status(404).sendFile(appPath)
-  res.status(404).render('404', { docTitle: '404: Page Not Found', path: '' });
-});
+app.use(useError);
 
 app.listen(port, () => {
   console.log(
