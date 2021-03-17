@@ -1,8 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   padding: 0;
   margin: 0;
-  box-sizing: border-box;
-  font-family: sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .header {
@@ -73,15 +78,24 @@ body {
 }
 
 .form-control label,
-.form-control input {
+.form-control input,
+.form-control textarea {
   display: block;
+  width: 100%;
+  margin-bottom: 0.25em;
 }
 
-.form-control input {
+.form-control input,
+.form-control textarea {
   border: 1px solid rgb(48, 29, 68);
   font: inherit;
   border-radius: 5px;
   width: 100%;
+}
+
+.form-control input:focus,
+.form-control textarea:focus {
+  outline-color: rgb(48, 29, 68);
 }
 
 
@@ -129,7 +143,7 @@ body {
 .btn {
   font: inherit;
   border-radius: 5px;
-  width: 100%;
+  /* width: 100%; */
   cursor: pointer;
   border: 1px solid rgb(48, 29, 68);
   background-color: rgb(48, 29, 68);

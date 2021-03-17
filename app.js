@@ -2,7 +2,7 @@ require('dotenv').config();
 const path = require('path');
 const express = require('express');
 const ejs = require('ejs');
-const {useError} = require('./controllers/error')
+const {useError} = require('./controllers/error-controller')
 // const Handlebars = require('express-handlebars');
 
 const app = express();
@@ -20,8 +20,8 @@ app.set('views', './views');
 
 const port = process.env.PORT;
 
-const adminRoutes = require('./routes/admin');
-const shopRoutes = require('./routes/shop');
+const adminRoutes = require('./routes/admin-routes');
+const shopRoutes = require('./routes/shop-routes');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public'))); //makes files in the public folder static and accessible ex. main.css. Images are another example of what can go in this folder

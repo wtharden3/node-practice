@@ -1,0 +1,51 @@
+<%- include('../includes/head.ejs') %>
+  </head>
+  <body>
+    <%- include('../includes/navigation.ejs') %>
+    <main class="main">
+      <h1 class="h1 main__h1"><%=docTitle%></h1>
+      <h2 class="h2 main__h2">Add a product</h2>
+      <form class="product-form form" action="/admin/add-product" method="POST">
+        <div class="form-control">
+          <label for="title">Product Title</label>
+          <input
+            class="product-form__input"
+            type="text"
+            name="title"
+            id="title"
+          />
+
+        </div>
+         <div class="form-control">
+          <label for="imgUrl">Product Image</label>
+          <input
+            class="product-form__input"
+            type="text"
+            name="imgUrl"
+            id="imgUrl"
+          />
+
+        </div>
+        <div class="form-control">
+          <label for="price">Product Price</label>
+          <input
+            class="product-form__input"
+            type="number"
+            name="price"
+            id="price"
+            step="0.01"
+          />
+        </div>
+        <div class="form-control">
+          <label for="description">Product Description</label>
+          <textarea
+            
+            name="description"
+            id="description"
+            rows="5"
+          ></textarea>
+
+        </div>
+        <button class="btn product-form__btn">Add This Product</button>
+      </form>
+    <%- include('../includes/end.ejs') %>
